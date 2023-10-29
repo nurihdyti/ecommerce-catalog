@@ -1,8 +1,11 @@
 <template>
   <div id="app" :style="bgColor">
-    <CardProduct :product="product" @onClickNext="getProducts" v-if="product">
-    </CardProduct>
-    <NoProduct v-else @onClickNext="getProducts" />
+    <LoadingCard v-if="isLoading"></LoadingCard>
+    <template v-else>
+      <CardProduct :product="product" @onClickNext="getProducts" v-if="product">
+      </CardProduct>
+      <NoProduct v-else @onClickNext="getProducts" />
+    </template>
     <div id="background-bawah"></div>
   </div>
 </template>
@@ -10,6 +13,7 @@
 <script>
 import CardProduct from "./components/CardProduct.vue";
 import NoProduct from "./components/NoProduct.vue";
+import LoadingCard from "./components/LoadingCard.vue";
 import axios from "axios";
 
 export default {
@@ -17,15 +21,18 @@ export default {
   components: {
     CardProduct,
     NoProduct,
+    LoadingCard,
   },
   data() {
     return {
       product: null,
       id_product: 1,
+      isLoading: false,
     };
   },
   methods: {
     getProducts() {
+      this.isLoading = true;
       axios
         .get("https://fakestoreapi.com/products/" + this.id_product.toString())
         .then((value) => {
@@ -38,6 +45,7 @@ export default {
           } else {
             this.product = null;
           }
+          this.isLoading = false;
 
           if (this.id_product === 20) {
             this.id_product = 1;

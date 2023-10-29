@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="product.image" alt="" width="80%" />
+    <img :src="product.image" alt="" />
     <div class="container">
       <h4 :class="isMenProduct ? 'title-produk1' : 'title-produk'">
         <b> {{ product.title }} </b>
