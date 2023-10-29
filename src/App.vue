@@ -1,18 +1,29 @@
 <template>
-  <div id="app">
-    <MenProduct :product="product" @onClickNext="getProducts"> </MenProduct>
+  <div
+    id="app"
+    :style="
+      isMenProduct
+        ? { '--background-color': '#d6e6ff' }
+        : { '--background-color': '#FDE2FF' }
+    "
+  >
+    <CardProduct :product="product" @onClickNext="getProducts" v-if="product">
+    </CardProduct>
+    <NoProduct v-else @onClickNext="getProducts" />
     <div id="background-bawah"></div>
   </div>
 </template>
 
 <script>
-import MenProduct from "./components/MenProduct.vue";
+import CardProduct from "./components/CardProduct.vue";
+import NoProduct from "./components/NoProduct.vue";
 import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    MenProduct,
+    CardProduct,
+    NoProduct,
   },
   data() {
     return {
@@ -26,10 +37,27 @@ export default {
         .get("https://fakestoreapi.com/products/" + this.id_product.toString())
         .then((value) => {
           // console.log(value);
-          this.product = value.data;
-          this.id_product = this.id_product + 1;
+          if (
+            value.data.category === "women's clothing" ||
+            value.data.category === "men's clothing"
+          ) {
+            this.product = value.data;
+          } else {
+            this.product = null;
+          }
+
+          if (this.id_product === 20) {
+            this.id_product = 1;
+          } else {
+            this.id_product = this.id_product + 1;
+          }
           // console.log(this);
         });
+    },
+  },
+  computed: {
+    isMenProduct() {
+      return this.product?.category === "men's clothing";
     },
   },
   mounted() {
@@ -48,17 +76,17 @@ export default {
   margin-top: 60px; */
   width: 100vw;
   height: 100vh;
-  background-color: #d6e6ff;
+  background-color: var(--background-color);
   display: flex;
   /* flex-direction: column; */
   justify-content: center;
   align-items: center;
+  background-image: url("./assets/bg-pattern.png");
 }
 
 body {
   margin: 0;
   /* background-color: #fde2ff; */
-  /* background-image: url(/image/bg-pattern.png); */
 }
 
 #background-blue {
