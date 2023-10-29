@@ -1,12 +1,5 @@
 <template>
-  <div
-    id="app"
-    :style="
-      isMenProduct
-        ? { '--background-color': '#d6e6ff' }
-        : { '--background-color': '#FDE2FF' }
-    "
-  >
+  <div id="app" :style="bgColor">
     <CardProduct :product="product" @onClickNext="getProducts" v-if="product">
     </CardProduct>
     <NoProduct v-else @onClickNext="getProducts" />
@@ -56,8 +49,14 @@ export default {
     },
   },
   computed: {
-    isMenProduct() {
-      return this.product?.category === "men's clothing";
+    bgColor() {
+      if (this.product?.category === "men's clothing") {
+        return { "--background-color": "#d6e6ff" };
+      } else if (this.product?.category === "women's clothing") {
+        return { "--background-color": "#FDE2FF" };
+      } else {
+        return { "--background-color": "#dcdcdc" };
+      }
     },
   },
   mounted() {
