@@ -174,6 +174,31 @@ body {
   line-height: normal;
 }
 
+.rating {
+  color: #3f3f3f;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.circles {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.circle-blue {
+  background-color: #002772;
+}
+
+.circle-pink {
+  background-color: #720060;
+}
+
 .garis {
   stroke-width: 1px;
   stroke: rgba(0, 0, 0, 0.2);

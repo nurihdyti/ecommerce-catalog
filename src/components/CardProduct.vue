@@ -5,7 +5,24 @@
       <h4 :class="isMenProduct ? 'title-produk1' : 'title-produk'">
         <b> {{ product.title }} </b>
       </h4>
-      <p class="category-produk">{{ product.category }}</p>
+      <div class="category-rating">
+        <p class="category-produk">{{ product.category }}</p>
+        <div class="rating">
+          <span style="margin-right: 7px">{{ product.rating.rate }}/5</span>
+          <span
+            :class="
+              isMenProduct ? 'circles circle-blue' : 'circles circle-pink'
+            "
+            v-for="x in Array(Math.floor(product.rating.rate))"
+            :key="x"
+          ></span>
+          <span
+            class="circles"
+            v-for="x in Array(5 - Math.floor(product.rating.rate))"
+            :key="x"
+          ></span>
+        </div>
+      </div>
       <hr class="garis" />
       <p class="detail-produk">
         {{ product.description }}
@@ -42,3 +59,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.category-rating,
+.rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
