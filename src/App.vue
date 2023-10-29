@@ -36,7 +36,6 @@ export default {
       axios
         .get("https://fakestoreapi.com/products/" + this.id_product.toString())
         .then((value) => {
-          // console.log(value);
           if (
             value.data.category === "women's clothing" ||
             value.data.category === "men's clothing"
@@ -52,7 +51,6 @@ export default {
           } else {
             this.id_product = this.id_product + 1;
           }
-          // console.log(this);
         });
     },
   },
@@ -75,17 +73,11 @@ export default {
 
 <style>
 #app {
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px; */
   width: 100vw;
   height: 100vh;
   background-color: var(--background-color);
   display: flex;
-  /* flex-direction: column; */
+
   justify-content: center;
   align-items: center;
   background-image: url("./assets/bg-pattern.png");
@@ -93,7 +85,6 @@ export default {
 
 body {
   margin: 0;
-  /* background-color: #fde2ff; */
 }
 
 #background-blue {
@@ -112,7 +103,6 @@ body {
   background-color: white;
   bottom: 0;
   left: 0;
-  /* z-index: -1; */
 }
 
 .card {
@@ -124,7 +114,6 @@ body {
   padding-top: 48px;
   padding-bottom: 48px;
   margin: auto;
-  /* margin-top: 10%; */
   border-radius: 10px;
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -141,7 +130,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-image: url(/image/sad-face.png); */
+  background-image: url(./assets/sad-face.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 65px 65px;
